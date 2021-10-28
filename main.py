@@ -1,9 +1,15 @@
 # Packages
 import smtplib
 import email.message
+from decouple import config
 
 # Create to server object
 server = smtplib.SMTP('smtp.gmail.com:587')
+
+# bring env variables
+
+user = config('user')
+password = config('password')
 
 # Mail content
 email_content = ''
@@ -14,8 +20,7 @@ msg = email.message.Message()
 
 # Mail parameters
 msg['Subject'] = 'Vistaflor Newsletter'
-msg['From'] = 'pp9130247@gmail.com'
-password = '1qaz<xsw23edc'
+msg['From'] = user
 msg.add_header('Content-Type', 'text/html')
 msg.set_payload(email_content)
 
@@ -25,7 +30,7 @@ server.login(msg['From'], password)
 
 # Sending mails
 clients = []
-with open('clientes.txt','r') as file:
+with open('clientes.txt', 'r') as file:
     for linea in file:
         clients.append(linea[:-1])
 
@@ -33,3 +38,5 @@ for client in clients:
     msg['To'] = client
     server.sendmail(msg['From'], client, msg.as_string())
     msg['To'] = ''
+
+server.close()
