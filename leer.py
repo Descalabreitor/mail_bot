@@ -2,7 +2,7 @@
 import poplib
 from email.parser import Parser
 import re
-import  os
+import os
 
 
 # We read .env variables
@@ -24,11 +24,10 @@ for i in range(num):
     response, headerLines, bts = m.retr(i + 1)
     # Se junta el mensaje
     mensaje = '\n'.join(headerLines)
-    if "No deseo que me envien más correos." not in mensaje:
-        pass
     p = Parser()
     email = p.parsestr(mensaje)
-
+    if "No deseo que me envien más correos." not in email['content']:
+        pass
     objectives.append(email["From"])
 
 with open('clientes.txt', 'r+') as file:
