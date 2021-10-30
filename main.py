@@ -1,15 +1,15 @@
 # Packages
 import smtplib
 import email.message
-from decouple import config
+import os
 
 # Create to server object
 server = smtplib.SMTP('smtp.gmail.com:587')
 
 # bring env variables
 
-user = config('user')
-password = config('password')
+user = os.environ.get('user')
+password = os.environ.get('password')
 
 # Mail content
 email_content = ''

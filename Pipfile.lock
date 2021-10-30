@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6aa9dc29d7e7866da9a5cfc8e093759f81881673cd72c582e0c418921d17d89a"
+            "sha256": "01b2308fc649a63db6edeecb1ced588f84c1c13ca12bf5ec7e9ee82ac316b5c0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,13 @@
             "markers": "platform_system == 'Windows'",
             "version": "==1.1.10"
         },
+        "decouple": {
+            "hashes": [
+                "sha256:c253c1cc62b76e9720a066f334552548c6de1884bc3bdf456ddb62d61b867b09"
+            ],
+            "index": "pypi",
+            "version": "==0.0.7"
+        },
         "pypiwin32": {
             "hashes": [
                 "sha256:67adf399debc1d5d14dffc1ab5acacb800da569754fafdc576b2a039485aa775",
@@ -30,6 +37,14 @@
             ],
             "markers": "platform_system == 'Windows'",
             "version": "==223"
+        },
+        "python-decouple": {
+            "hashes": [
+                "sha256:011d3f785367c54a72cf8a07d3a7a48bb8cc1a0f8e6c70353ca5767ebf7c8c9d",
+                "sha256:68e4b3fcc97e24bc90eecc514852d0bf970f4ff031f5f7a6728ddafa9afefcaf"
+            ],
+            "index": "pypi",
+            "version": "==3.5"
         },
         "pyttsx3": {
             "hashes": [

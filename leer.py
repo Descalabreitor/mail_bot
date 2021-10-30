@@ -2,13 +2,13 @@
 import poplib
 from email.parser import Parser
 import re
+import  os
 
-from decouple import config
 
 # We read .env variables
 
-user = config('user')
-password = config('password')
+user = os.environ.get('user')
+password = os.environ.get('password')
 
 # Connect to server
 m = poplib.POP3_SSL('pop.gmail.com', 995)
