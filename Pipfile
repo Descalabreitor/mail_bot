@@ -9,6 +9,7 @@ speechrecognition = "*"
 pyttsx3 = "*"
 decouple = "*"
 python-decouple = "*"
+imap-tools = "*"
 
 [dev-packages]
 

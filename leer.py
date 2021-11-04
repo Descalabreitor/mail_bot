@@ -1,32 +1,22 @@
 # Packages
-import poplib
-from email.parser import Parser
-import re
 import os
+import re
+import hashlib
+from imap_tools import MailBox
 
 
 # We read .env variables
 def update_clients(user, password):
 
     # Connect to server
-    m = poplib.POP3_SSL('pop.gmail.com', 995)
-    m.user(user)
-    m.pass_(password)
+    mailbox = MailBox(user+'gmail.com')
+    mailbox.login(user, password)
 
-    # Check and read mailbox
-    num = len(m.list()[1])
-
-    objectives = []
-    for i in range(num):
-        # Se lee el mensaje
-        response, header_lines, bts = m.retr(i + 1)
-        # Se junta el mensaje
-        mensaje = '\n'.join(header_lines)
-        print(mensaje)
-        p = Parser()
-        email = p.parsestr(header_lines)
-        print(str(email['From']))
-        objectives.append(email["From"])
+    for m in mailbox.fetch():
+        cuerpo = ''
+        subject = m.subject
+        print(subject)
+    mailbox.logout()
 
     with open('clientes.txt', 'r+') as file:
         clients = file.read()
