@@ -2,6 +2,7 @@
 import smtplib
 import email.message
 import os
+from leer import update_clients
 
 # Create to server object
 server = smtplib.SMTP('smtp.gmail.com:587')
@@ -11,6 +12,8 @@ server = smtplib.SMTP('smtp.gmail.com:587')
 user = os.environ.get('user')
 password = os.environ.get('password')
 
+#Actualizamos la base de datos
+update_clients(user, password)
 # Mail content
 email_content = ''
 with open('mensaje.html', 'r') as file:
