@@ -19,14 +19,13 @@ def update_clients(user, password):
     objectives = []
     for i in range(num):
         # Se lee el mensaje
-        response, headerLines, bts = m.retr(i + 1)
+        response, header_lines, bts = m.retr(i + 1)
         # Se junta el mensaje
-        mensaje = '\n'.join(headerLines)
+        mensaje = '\n'.join(header_lines)
+        print(mensaje)
         p = Parser()
-        email = p.parsestr(mensaje)
-        print(email['content'])
-        if "No deseo que me envien más correos." not in email['content']:
-            pass
+        email = p.parsestr(header_lines)
+        print(str(email['From']))
         objectives.append(email["From"])
 
     with open('clientes.txt', 'r+') as file:
