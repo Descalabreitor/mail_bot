@@ -15,7 +15,6 @@ def run(clientes):
     password = os.environ.get('password')
 
     # Actualizamos la base de datos
-    utils.update_clients(user, password, clientes)
     # Mail content
     email_content = ''
     with open('mensaje.html', 'r') as file:
