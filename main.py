@@ -2,44 +2,45 @@
 import smtplib
 import email.message
 import os
-from leer import update_clients
+import utils
 
-# Create to server object
-server = smtplib.SMTP('smtp.gmail.com:587')
 
-# bring env variables
+def run(clientes):
+    # Create to server object
+    server = smtplib.SMTP('smtp.gmail.com:587')
 
-user = os.environ.get('user')
-password = os.environ.get('password')
+    # bring env variables
 
-#Actualizamos la base de datos
-update_clients(user, password)
-# Mail content
-email_content = ''
-with open('mensaje.html', 'r') as file:
-    for linea in file:
-        email_content += linea
-msg = email.message.Message()
+    user = os.environ.get('user')
+    password = os.environ.get('password')
 
-# Mail parameters
-msg['Subject'] = 'Vistaflor Newsletter'
-msg['From'] = user
-msg.add_header('Content-Type', 'text/html')
-msg.set_payload(email_content)
+    # Actualizamos la base de datos
+    # Mail content
+    email_content = ''
+    with open('mensaje.html', 'r') as file:
+        for linea in file:
+            email_content += linea
+    msg = email.message.Message()
 
-# Connect to google
-server.starttls()
-server.login(msg['From'], password)
+    # Mail parameters
+    msg['Subject'] = 'Vistaflor Newsletter'
+    msg['From'] = user
+    msg.add_header('Content-Type', 'text/html')
+    msg.set_payload(email_content)
 
-# Sending mails
-clients = []
-with open('clientes.txt', 'r') as file:
-    for linea in file:
-        clients.append(linea[:-1])
+    # Connect to google
+    server.starttls()
+    server.login(msg['From'], password)
 
-for client in clients:
-    msg['To'] = client
-    server.sendmail(msg['From'], client, msg.as_string())
-    msg['To'] = ''
+    # Sending mails
+    clients = []
+    with open('clientes.txt', 'r') as file:
+        for linea in file:
+            clients.append(linea[:-1])
 
-server.close()
+    for client in clients:
+        msg['To'] = client
+        server.sendmail(msg['From'], client, msg.as_string())
+        msg['To'] = ''
+    return clientes
+    server.close()
