@@ -2,10 +2,9 @@
 import smtplib
 import email.message
 import os
-import utils
 
 
-def run(clientes):
+def run():
     # Create to server object
     server = smtplib.SMTP('smtp.gmail.com:587')
 
@@ -14,7 +13,7 @@ def run(clientes):
     user = os.environ.get('user')
     password = os.environ.get('password')
 
-    # Actualizamos la base de datos
+
     # Mail content
     email_content = ''
     with open('mensaje.html', 'r') as file:
@@ -42,5 +41,7 @@ def run(clientes):
         msg['To'] = client
         server.sendmail(msg['From'], client, msg.as_string())
         msg['To'] = ''
-    return clientes
     server.close()
+
+
+run()
